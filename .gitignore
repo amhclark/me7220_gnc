@@ -1,0 +1,8 @@
+# Folders
+GNCmun/
+geoids/
+.ipynb_checkpoints/
+*.tar
+
+# Files
+test.py
