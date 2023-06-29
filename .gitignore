@@ -5,6 +5,12 @@ GNCmun/
 geoids/
 .ipynb_checkpoints/
 *.tar
+GNCvenv/bin
+GNCvenv/include
+GNCvenv/lib
+GNCvenv/share
 
 # Files
 test.py
+GNCvenv/pyvenv.cfg
+
