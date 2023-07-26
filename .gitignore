@@ -9,6 +9,7 @@ GNCvenv/bin
 GNCvenv/include
 GNCvenv/lib
 GNCvenv/share
+GNCvenv/Underactuated_Notes
 
 # Files
 test.py
