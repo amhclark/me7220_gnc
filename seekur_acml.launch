@@ -1,0 +1,16 @@
+<launch>
+
+  <arg name="scan_topic" default="scan" />
+  <arg name="map_file" default="$(find lab2_package)/maps/my_map.yaml"/>
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+    <node pkg="amcl" type="amcl" name="amcl">
+    <rosparam file="$(find seekur_pkg)/acml_params.yaml" command="load" />
+    <remap from="scan" to="/pioneer1/scan"/>
+    </node>
+
+    <node name="ariaClientDriver" pkg="Ros_Kinetic_AriaClientDrive" type="ariaClientDriverNode" args="-host localhost -p 7272" output="screen" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find Ros_Kinetic_AriaClientDriver)/rviz_conf/basic.rviz" />
+
+</launch>

@@ -1,0 +1,48 @@
+<launch>
+
+    <arg name="scan_topic" default="/pioneer1/scan"/>
+    <arg name="base_frame" default="pioneer1/base_link"/>
+    <arg name="odom_frame" default="odom"/>
+
+    <node pkg="gmapping" type="slam_gmapping" name="gmapping" output="screen">
+
+        <!-- Parameters for Gmapping -->
+        <param name="throttle_scans" type="int" value="1" />
+        <param name="base_frame" type="string" value="$(arg base_frame)" />
+        <param name="map_frame" type="string" value="map" />
+        <param name="odom_frame" type="string" value="odom" />
+        <param name="map_update_interval" type="int" value="5" />
+        <param name="maxUrange" type="int" value="80" />
+        <param name="sigma" type="double" value="0.05" />
+        <param name="kernelSize" type="int" value="1" />
+        <param name="lstep" type="double" value="0.05" />
+        <param name="astep" type="double" value="0.05" />
+        <param name="iterations" type="int" value="5" />
+        <param name="lsigma" type="double" value="0.075" />
+        <param name="ogain" type="double" value="3.0" />
+        <param name="lskip" type="int" value="0" />
+        <param name="srr" type="double" value="0.1" />
+        <param name="srt" type="double" value="0.2" />
+        <param name="str" type="double" value="0.1" />
+        <param name="stt" type="double" value="0.2" />
+        <param name="linearUpdate" type="double" value="1.0" />
+        <param name="angularUpdate" type="double" value="0.5" />
+        <param name="temporalUpdate" type="double" value="-1.0" />
+        <param name="resampleThreshold" type="double" value="0.5" />
+        <param name="particles" type="int" value="30" />
+        <param name="xmin" type="double" value="-100.0" />
+        <param name="ymin" type="double" value="-100.0" />
+        <param name="xmax" type="double" value="100.0" />
+        <param name="ymax" type="double" value="100.0" />
+        <param name="delta" type="double" value="0.05" />
+        <param name="llsamplerange" type="double" value="0.01" />
+        <param name="llsamplestep" type="double" value="0.01" />
+        <param name="transform_publish_period" type="double" value="0.05" />
+        <param name="occ_thresh" type="double" value="0.25" />
+
+        <remap from="scan" to="$(arg scan_topic)" />
+    </node>
+
+    <node name="ariaClientDriver" pkg="Ros_Kinetic_AriaClientDrive" type="ariaClientDriverNode" args="-host localhost -p 7272" output="screen" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find Ros_Kinetic_AriaClientDriver)/rviz_conf/basic.rviz" />
+</launch>
